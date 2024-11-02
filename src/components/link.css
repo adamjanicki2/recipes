@@ -1,0 +1,9 @@
+.link {
+  text-decoration: dotted underline;
+}
+
+@media (hover: hover) {
+  .link:hover {
+    text-decoration: solid underline;
+  }
+}

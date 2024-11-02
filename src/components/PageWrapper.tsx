@@ -1,5 +1,5 @@
 import { useDocumentTitle } from "src/hooks";
-import type { Children } from "src/types";
+import type { Children } from "src/types/util";
 
 type Props = {
   children: Children;

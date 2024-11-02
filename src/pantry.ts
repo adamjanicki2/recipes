@@ -1,50 +1,52 @@
-import { Fraction, Food } from "src/types";
-
-const zero = new Fraction(0);
+import { Food } from "src/types/util";
 
 export const foods: Record<string, Food> = {
-  "Skim Milk": {
+  skimMilk: {
     name: "Skim Milk",
-    cpg: new Fraction(90, 244),
+    cpg: 0.34,
   },
-  "Rolled Oats": {
+  oats: {
     name: "Rolled Oats",
-    cpg: new Fraction(153, 41),
+    cpg: 3.731,
   },
-  Applesauce: {
+  applesauce: {
     name: "Applesauce",
-    cpg: new Fraction(102, 244),
+    cpg: 0.418,
   },
-  Salt: {
+  salt: {
     name: "Salt",
-    cpg: zero,
+    cpg: 0,
   },
-  "Baking Powder": {
+  bakingPowder: {
     name: "Baking Powder",
-    cpg: zero,
+    cpg: 0,
   },
-  Cinnamon: {
+  cinnamon: {
     name: "Cinnamon",
-    cpg: zero,
+    cpg: 0,
   },
-  "Ground Ginger": {
+  groundGinger: {
     name: "Ground Ginger",
-    cpg: zero,
+    cpg: 0,
   },
-  "Maple Syrup": {
+  syrup: {
     name: "Maple Syrup",
-    cpg: new Fraction(52, 20),
+    cpg: 2.6,
   },
-  "Vanilla Protein Powder": {
+  proteinPowder: {
     name: "Vanilla Protein Powder",
-    cpg: new Fraction(4),
+    cpg: 4,
   },
-  "Egg Whites": {
+  eggWhites: {
     name: "Egg Whites",
-    cpg: new Fraction(24, 46),
+    cpg: 0.521,
   },
-  "Pumpkin Puree": {
+  pumpkin: {
     name: "Pumpkin Puree",
-    cpg: new Fraction(83, 245),
+    cpg: 0.338,
+  },
+  vanillaExtract: {
+    name: "Vanilla Extract",
+    cpg: 0,
   },
 };

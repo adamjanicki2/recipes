@@ -11,14 +11,6 @@ body {
   overflow-x: hidden;
 }
 
-code {
-  background-color: #eee;
-  color: #ff4136;
-  font-size: 90%;
-  border-radius: 4px;
-  padding: 0 0.25rem;
-}
-
 .page-title-text {
   font-size: calc(2.5rem + 1vw);
   font-weight: 700;
@@ -26,4 +18,8 @@ code {
 
 .bordering {
   border: 2px solid green;
+}
+
+p {
+  line-height: 1.5;
 }
