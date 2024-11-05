@@ -2,6 +2,11 @@
   --breakpoint: 768px;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
 body {
   margin: 0;
   font-family: "monaco", "Courier New", Courier, monospace;
@@ -12,7 +17,7 @@ body {
 }
 
 .page-title-text {
-  font-size: calc(2.5rem + 1vw);
+  font-size: calc(1.5rem + 2vw);
   font-weight: 700;
 }
 
@@ -20,6 +25,7 @@ body {
   border: 2px solid green;
 }
 
-p {
+p,
+li {
   line-height: 1.5;
 }

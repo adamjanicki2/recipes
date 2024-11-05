@@ -1,3 +1,3 @@
 import type { Recipe } from "src/types/util";
 
-export const desserts: readonly Recipe[] = [];
+export const dinners: readonly Recipe[] = [];

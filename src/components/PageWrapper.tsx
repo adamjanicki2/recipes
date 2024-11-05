@@ -19,7 +19,7 @@ const PageWrapper = ({
   return (
     <div
       className="flex flex-column items-center w-100 pb3"
-      style={{ minHeight: "70vh" }}
+      style={{ minHeight: "70vh", maxWidth: "95%", margin: "0 auto" }}
     >
       <h1 className={`page-title-text tc ${titleClass}`}>{title}</h1>
       {children}
