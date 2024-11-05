@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { TripleFade as Hamburger } from "@adamjanicki/ui";
 import "src/components/nav.css";
-import Link, { UnstyledLink } from "src/components/Link";
+import Link from "src/components/Link";
 import { useLocation } from "react-router-dom";
 
 type NavlinkProps = {
@@ -27,9 +27,9 @@ const Nav = () => {
   return (
     <nav className="flex items-center justify-between w-100 nav pv2 ph4">
       <div className="flex items-center justify-between bar-container">
-        <UnstyledLink className="nav-title" to="/">
-          Recipes
-        </UnstyledLink>
+        <Link className="nav-title" to="/">
+          /recipes
+        </Link>
         <div className="mobile">
           <Hamburger open={open} onClick={() => setOpen(!open)} />
         </div>
@@ -39,7 +39,7 @@ const Nav = () => {
         style={{ display: open ? "flex" : undefined }}
       >
         <Navlink to="/">Home</Navlink>
-        <Navlink to="/about/">About</Navlink>
+        <Navlink to="/search/">Search</Navlink>
       </ul>
     </nav>
   );

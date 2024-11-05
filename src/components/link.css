@@ -1,0 +1,17 @@
+.link {
+  text-decoration: dotted underline;
+}
+
+.cards {
+  border: 2px dashed black;
+}
+
+@media (hover: hover) {
+  .link:hover {
+    text-decoration: solid underline;
+  }
+
+  .cards:hover {
+    border: 2px solid black;
+  }
+}

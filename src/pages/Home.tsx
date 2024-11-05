@@ -1,14 +1,27 @@
+import { UnstyledLink } from "src/components/Link";
 import PageWrapper from "src/components/PageWrapper";
+
+const menus = [
+  ["breakfast", "Breakfast"],
+  ["lunch", "Lunch"],
+  ["dinner", "Dinner"],
+  ["dessert", "Desserts"],
+  ["snack", "Snacks"],
+  ["drink", "Drinks"],
+] as const;
 
 const Home = () => (
   <PageWrapper title="Home">
-    <p className="tc f4 fw4">
-      You should run <code>setup.py</code> to auto-rename a bunch of strings.{" "}
-      <br />
-      You can search for <code>skeleton</code> in your editor to find all places
-      where you should make your own changes if you really want to do it
-      manually
-    </p>
+    <div className="flex flex-wrap items-center justify-center">
+      {menus.map(([slug, label]) => (
+        <UnstyledLink
+          className="flex items-center justify-center pa5 ma3 cards"
+          to={`/${slug}`}
+        >
+          <h2>{label}</h2>
+        </UnstyledLink>
+      ))}
+    </div>
   </PageWrapper>
 );
 

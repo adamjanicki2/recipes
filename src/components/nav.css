@@ -2,7 +2,6 @@
   position: sticky;
   width: 100%;
   top: 0;
-  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   background-color: white;
 }
@@ -17,6 +16,7 @@
   font-size: 1.5rem;
   font-weight: 700;
   white-space: nowrap;
+  text-decoration: none !important;
 }
 
 .navlink-li {
