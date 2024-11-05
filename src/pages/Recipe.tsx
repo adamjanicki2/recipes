@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Breadcrumb } from "src/components/Breadcrumbs";
 import Link from "src/components/Link";
 import Markdown, { SimpleMD } from "src/components/Markdown";
 import PageWrapper from "src/components/PageWrapper";
@@ -7,6 +8,7 @@ import { formatDate } from "src/util";
 
 type Props = {
   recipe: RecType;
+  crumbs: Breadcrumb[];
 };
 
 const tempUnits: Record<System, string> = {
@@ -14,7 +16,7 @@ const tempUnits: Record<System, string> = {
   metric: "C",
 };
 
-export default function Recipe({ recipe }: Props) {
+export default function Recipe({ recipe, crumbs }: Props) {
   const {
     title,
     description,
@@ -34,7 +36,7 @@ export default function Recipe({ recipe }: Props) {
   const ingredients = mdFormatIngredients(rawIngredients, system);
 
   return (
-    <PageWrapper title={title}>
+    <PageWrapper title={title} crumbs={crumbs}>
       <span>{formatDate(created)}</span>
       <SimpleMD>{description}</SimpleMD>
       <div>
