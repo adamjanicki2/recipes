@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.css": "/recipes/static/css/main.3fb1e0c0.css",
-    "main.js": "/recipes/static/js/main.187cfd61.js",
+    "main.css": "/recipes/static/css/main.7431e7f7.css",
+    "main.js": "/recipes/static/js/main.a2230401.js",
     "index.html": "/recipes/index.html"
   },
   "entrypoints": [
-    "static/css/main.3fb1e0c0.css",
-    "static/js/main.187cfd61.js"
+    "static/css/main.7431e7f7.css",
+    "static/js/main.a2230401.js"
   ]
 }
