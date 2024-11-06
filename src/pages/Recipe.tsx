@@ -1,10 +1,11 @@
+import { Select } from "@adamjanicki/ui";
 import { useState } from "react";
 import { Breadcrumb } from "src/components/Breadcrumbs";
 import Link from "src/components/Link";
 import Markdown, { SimpleMD } from "src/components/Markdown";
 import PageWrapper from "src/components/PageWrapper";
 import { Recipe as RecType, System, Quantity } from "src/types/util";
-import { formatDate } from "src/util";
+import { formatDate, toCelsius } from "src/util";
 
 type Props = {
   recipe: RecType;
@@ -28,12 +29,12 @@ export default function Recipe({ recipe, crumbs }: Props) {
     tags,
   } = recipe;
 
-  const [system] = useState<System>("metric");
+  const [system, setSystem] = useState<System>("imperial");
 
   const directions = mdFormatDirections(
     replaceDirectionKeywords(rawDirections, cookInfo, system)
   );
-  const ingredients = mdFormatIngredients(rawIngredients, system);
+  const ingredients = formatIngredients(rawIngredients, system);
 
   return (
     <PageWrapper title={title} crumbs={crumbs}>
@@ -44,12 +45,22 @@ export default function Recipe({ recipe, crumbs }: Props) {
         {cookInfo?.time && ` | Cook time: ${cookInfo?.time} min`}
       </div>
       <h2 id="ingredients">Ingredients</h2>
-      <Markdown>{ingredients}</Markdown>
+      <Select
+        corners="sharp"
+        aria-label="unit select"
+        options={["metric", "imperial"]}
+        onChange={(e) => setSystem(e.target.value as any)}
+        value={system}
+      />
+      {ingredients}
       <h2 id="directions">How to make</h2>
       <Markdown>{directions}</Markdown>
+      <h3 id="tags">Tags</h3>
       <div className="flex">
-        {tags.map((tag) => (
-          <Link to={`/search/${tag}`}>{tag}</Link>
+        {tags.map((tag, i) => (
+          <Link className="mh1" key={i} to={`/search/${tag}`}>
+            {tag}
+          </Link>
         ))}
       </div>
     </PageWrapper>
@@ -61,8 +72,10 @@ function replaceDirectionKeywords(
   cookInfo: RecType["cookInfo"],
   system: System
 ): string[] {
+  let temp = cookInfo?.temp;
+  temp = temp && system === "metric" ? toCelsius(temp) : temp;
   const replacements: [string, string][] = [
-    ["__TEMP__", `${cookInfo?.temp}°${tempUnits[system]}`],
+    ["__TEMP__", `${temp}°${tempUnits[system]}`],
     ["__COOK_TIME__", cookInfo?.time?.toString() as string],
   ];
   return directions.map((direction) =>
@@ -80,29 +93,35 @@ function mdFormatDirections(directions: string[]): string {
   );
 }
 
-function mdFormatIngredients(
+function formatIngredients(
   ingredients: RecType["ingredients"],
   system: System
-): string {
-  return ingredients.reduce(
-    (acc, cur) =>
-      `${acc}- ${formatIngredient(
-        cur.quantity,
-        system
-      )} ${cur.food.name.toLowerCase()}\n`,
-    ""
+): JSX.Element {
+  return (
+    <ul>
+      {ingredients.map((ingredient) => (
+        <li>
+          {formatIngredient(ingredient.quantity, system)}{" "}
+          {ingredient.food.name.toLowerCase()}
+        </li>
+      ))}
+    </ul>
   );
 }
 
-function formatIngredient(quantity: Quantity, system: System): string {
+function formatIngredient(
+  quantity: Quantity,
+  system: System
+): JSX.Element | string {
   if (system === "metric") {
     return quantity.grams + "g";
   }
   let amt = quantity.imperial.amount;
   amt = typeof amt === "number" ? amt : amt.decimal;
   return (
-    quantity.imperial.amount.toString() +
-    quantity.imperial.unit +
-    (amt > 1 ? "s" : "")
+    <>
+      {quantity.imperial.amount.toString()}{" "}
+      {quantity.imperial.unit + (amt > 1 ? "s" : "")}
+    </>
   );
 }

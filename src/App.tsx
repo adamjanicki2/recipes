@@ -1,4 +1,4 @@
-import { useScrollToHash } from "@adamjanicki/ui";
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "src/components/Footer";
 import Nav from "src/components/Nav";
@@ -15,10 +15,11 @@ import { dinners } from "src/data/dinners";
 import { snacks } from "src/data/snacks";
 import { drinks } from "src/data/drinks";
 import type { Breadcrumb } from "src/components/Breadcrumbs";
+import ScrollTop from "src/components/ScrollTop";
 
 const home: Breadcrumb = {
   to: "/",
-  label: "home",
+  label: "Home",
 };
 
 const menus = [
@@ -31,43 +32,42 @@ const menus = [
 ] as const;
 
 const App = () => {
-  useScrollToHash();
-
   return (
     <BrowserRouter basename="/recipes">
+      <ScrollTop />
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/search/:query?" element={<Search />} />
         {menus.map(([lowername, title, recipes]) => (
-          <>
+          <React.Fragment key={lowername}>
             <Route
               path={`/${lowername}`}
               element={
                 <List
                   recipes={recipes}
                   title={title}
-                  lowername={lowername}
                   crumbs={[home, { label: title }]}
                 />
               }
             />
-            {recipes.map((recipe) => (
+            {recipes.map((recipe, i) => (
               <Route
-                path={`/${lowername}/${routify(recipe.title)}`}
+                key={i}
+                path={`/${recipe.type}/${routify(recipe.title)}`}
                 element={
                   <Recipe
                     recipe={recipe}
                     crumbs={[
                       home,
-                      { to: "/" + lowername, label: title },
+                      { to: "/" + recipe.type, label: title },
                       { label: recipe.title },
                     ]}
                   />
                 }
               />
             ))}
-          </>
+          </React.Fragment>
         ))}
         {/* Make sure this is the last route */}
         <Route path="*" element={<NotFound />} />
