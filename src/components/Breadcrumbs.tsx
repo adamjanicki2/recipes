@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "src/components/Link";
 
 export type Breadcrumb = {
@@ -18,10 +19,10 @@ export default function Breadcrumbs({ crumbs }: Props) {
       }}
     >
       {crumbs.map(({ to, label }, i) => (
-        <>
+        <React.Fragment key={i}>
           {i > 0 && <> / </>}
           {to ? <Link to={to}>{label}</Link> : <span>{label}</span>}
-        </>
+        </React.Fragment>
       ))}
     </div>
   );

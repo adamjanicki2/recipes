@@ -5,6 +5,7 @@ import type { Recipe } from "src/types/util";
 export const breakfasts: readonly Recipe[] = [
   {
     title: "Pumpkin Baked Oats",
+    type: "breakfast",
     description:
       "Loosely based on a the flavor profile of pumpkin muffins, this is a great healthy dessert option during the Fall season.",
     created: new Date("2024-10-28"),
@@ -136,6 +137,7 @@ export const breakfasts: readonly Recipe[] = [
   },
   {
     title: "Applesauce Baked Oats",
+    type: "breakfast",
     description:
       "I based this recipe on the classic apple crisp, just without all of the butter or sugar _(i.e. it's way worse)_.",
     created: new Date("2024-10-14"),

@@ -42,6 +42,7 @@ type CookInfo = {
 };
 export type Recipe = {
   title: string;
+  type: string;
   description: string;
   created: Date;
   ingredients: Ingredient[];
