@@ -2,8 +2,8 @@ import Fraction from "src/types/Fraction";
 
 export type Children = React.ReactNode | React.ReactNode[];
 
-const IMPERIAL_UNITS = ["cup", "tsp", "tbsp", "lb"] as const;
-type Unit = typeof IMPERIAL_UNITS[number];
+const IMPERIAL_UNITS = ["cup", "tsp", "tbsp", "lb", "oz"] as const;
+export type Unit = typeof IMPERIAL_UNITS[number];
 const SYSTEMS = ["metric", "imperial"] as const;
 export type System = typeof SYSTEMS[number];
 
@@ -11,7 +11,7 @@ export type Quantity = {
   grams: number;
   imperial: {
     amount: Fraction | number;
-    unit: Unit;
+    unit?: Unit;
   };
 };
 
@@ -40,9 +40,18 @@ type CookInfo = {
   time: number;
   temp?: number;
 };
+const TYPES = [
+  "breakfast",
+  "lunch",
+  "dinner",
+  "dessert",
+  "snack",
+  "drink",
+] as const;
+type Type = typeof TYPES[number];
 export type Recipe = {
   title: string;
-  type: string;
+  type: Type;
   description: string;
   created: Date;
   ingredients: Ingredient[];

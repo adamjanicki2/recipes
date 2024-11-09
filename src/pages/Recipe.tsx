@@ -5,7 +5,7 @@ import Link from "src/components/Link";
 import Markdown, { SimpleMD } from "src/components/Markdown";
 import PageWrapper from "src/components/PageWrapper";
 import { Recipe as RecType, System, Quantity } from "src/types/util";
-import { formatDate, toCelsius } from "src/util";
+import { formatDate, toCelsius, UNITS_NEEDING_PLURALIZATION } from "src/util";
 
 type Props = {
   recipe: RecType;
@@ -41,7 +41,7 @@ export default function Recipe({ recipe, crumbs }: Props) {
       <span>{formatDate(created)}</span>
       <SimpleMD>{description}</SimpleMD>
       <div>
-        Prep time: {prepTime}min{" "}
+        Prep time: {prepTime} min{" "}
         {cookInfo?.time && ` | Cook time: ${cookInfo?.time} min`}
       </div>
       <h2 id="ingredients">Ingredients</h2>
@@ -55,7 +55,7 @@ export default function Recipe({ recipe, crumbs }: Props) {
       {ingredients}
       <h2 id="directions">How to make</h2>
       <Markdown>{directions}</Markdown>
-      <h3 id="tags">Tags</h3>
+      {Boolean(tags?.length) && <h3 id="tags">Tags</h3>}
       <div className="flex">
         {tags.map((tag, i) => (
           <Link className="mh1" key={i} to={`/search/${tag}`}>
@@ -113,6 +113,10 @@ function formatIngredient(
   quantity: Quantity,
   system: System
 ): JSX.Element | string {
+  if (!quantity.imperial.unit) {
+    // unitless
+    return quantity.imperial.amount.toString();
+  }
   if (system === "metric") {
     return quantity.grams + "g";
   }
@@ -121,7 +125,10 @@ function formatIngredient(
   return (
     <>
       {quantity.imperial.amount.toString()}{" "}
-      {quantity.imperial.unit + (amt > 1 ? "s" : "")}
+      {quantity.imperial.unit +
+        (amt > 1 && UNITS_NEEDING_PLURALIZATION.includes(quantity.imperial.unit)
+          ? "s"
+          : "")}
     </>
   );
 }

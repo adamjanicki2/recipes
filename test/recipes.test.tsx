@@ -20,10 +20,18 @@ describe("recipes wholesome", () => {
     });
   });
 
-  it("directions should include no newlines", () => {
+  it("should include no newlines in directions", () => {
     recipes.forEach((recipe) => {
       recipe.directions.forEach((direction) => {
         expect(direction.includes("\n")).toBeFalsy();
+      });
+    });
+  });
+
+  it("should only contain valid ingredients", () => {
+    recipes.forEach((recipe) => {
+      recipe.ingredients.forEach((ingredient) => {
+        expect(ingredient.food).toBeTruthy();
       });
     });
   });
