@@ -31,7 +31,11 @@ describe("recipes wholesome", () => {
   it("should only contain valid ingredients", () => {
     recipes.forEach((recipe) => {
       recipe.ingredients.forEach((ingredient) => {
-        expect(ingredient.food).toBeTruthy();
+        if (!ingredient.food) {
+          throw new Error(
+            `Missing ingredient. Ingredient: ${JSON.stringify(ingredient)}`
+          );
+        }
       });
     });
   });

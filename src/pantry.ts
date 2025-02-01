@@ -89,4 +89,16 @@ export const foods: Record<string, Food> = {
     name: "Olive Oil",
     cpg: 8.5,
   },
+  kodiakMix: {
+    name: "Kodiak Protein Pancake Mix",
+    cpg: 3.584,
+  },
+  blueberries: {
+    name: "Blueberries",
+    cpg: 0.57,
+  },
+  lemonJuice: {
+    name: "Lemon Juice",
+    cpg: 0,
+  },
 };
